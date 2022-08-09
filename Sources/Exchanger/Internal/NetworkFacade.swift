@@ -26,12 +26,14 @@ class NetworkFacade {
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-//                    print(response.request?.url?.absoluteString ?? "")
-//                    let json = try! JSONSerialization.jsonObject(with: response.data, options: [])
-//                    print(json)
                     guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
-                        let error = MoyaError.statusCode(.init(statusCode: 500, data: response.data))
-                        continuation.resume(returning: .failure(error))
+                        if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
+                            let error = MoyaError.statusCode(.init(statusCode: errorResponse.statusCode, data: response.data))
+                            continuation.resume(returning: .failure(error))
+                        } else {
+                            let error = MoyaError.statusCode(.init(statusCode: 500, data: response.data))
+                            continuation.resume(returning: .failure(error))
+                        }
                         return
                     }
                     continuation.resume(returning: .success(object))

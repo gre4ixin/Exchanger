@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Pavel Grechikhin on 09.08.2022.
-//
-
 import Foundation
 
 struct QuoteDTO: Decodable {
@@ -20,10 +13,10 @@ struct Token: Decodable {
     let logoURI: String
 }
 
-struct ProtocolElement: Decodable {
-    let name: String
-    let part: Int
-    let fromTokenAddress, toTokenAddress: String
+public struct ProtocolElement: Decodable {
+    public let name: String
+    public let part: Int
+    public let fromTokenAddress, toTokenAddress: String
 }
 
 struct SwapDTO: Decodable {

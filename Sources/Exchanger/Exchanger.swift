@@ -1,6 +1,3 @@
 public struct Exchanger {
-    public private(set) var text = "Hello, World!"
-
-    public init() {
-    }
+    public static private(set) var version = "0.0.1"
 }

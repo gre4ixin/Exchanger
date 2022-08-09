@@ -2,7 +2,7 @@ import Foundation
 
 public enum ExchangeBlockchain {
     case ethereum
-    case binanceSmartChain
+    case BSC
     case polygon
     case optimism
     case arbitrum
@@ -14,7 +14,7 @@ public enum ExchangeBlockchain {
         switch self {
         case .ethereum:
             return "1"
-        case .binanceSmartChain:
+        case .BSC:
             return "56"
         case .polygon:
             return "137"

@@ -3,9 +3,9 @@ import Moya
 
 enum SwapTarget {
     //find the best quote to exchange via 1inch router
-    case quote(blockchain: ExchangeBlockchain, parameters: QuoteETO)
+    case quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters)
     //generate data for calling the 1inch router for exchange
-    case swap(blockchain: ExchangeBlockchain, parameters: SwapETO)
+    case swap(blockchain: ExchangeBlockchain, parameters: SwapParameters)
 }
 
 extension SwapTarget: TargetType {

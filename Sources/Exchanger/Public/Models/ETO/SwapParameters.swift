@@ -1,6 +1,6 @@
 import Foundation
 
-struct QuoteETO {
+struct QuoteParameters {
     var fromTokenAddress: String
     var toTokenAddress: String
     var amount: String
@@ -16,12 +16,7 @@ struct QuoteETO {
         var params: [String: Any] = [
             "fromTokenAddress": fromTokenAddress,
             "toTokenAddress": toTokenAddress,
-            "amount": amount,
-            "protocols": protocols ?? "all",
-            "parts": parts ?? "50",
-            "mainRouteParts": mainRouteParts ?? "10",
-            "complexityLevel": complexityLevel ?? "2",
-            "fee": fee ?? 0
+            "amount": amount
         ]
         
         if let gasLimit = gasLimit {
@@ -32,11 +27,31 @@ struct QuoteETO {
             params["gasPrice"] = gasPrice
         }
         
+        if let fee = fee {
+            params["fee"] = fee
+        }
+        
+        if let complexityLevel = complexityLevel {
+            params["complexityLevel"] = complexityLevel
+        }
+        
+        if let mainRouteParts = mainRouteParts {
+            params["mainRouteParts"] = mainRouteParts
+        }
+        
+        if let parts = parts {
+            params["parts"] = parts
+        }
+        
+        if let protocols = protocols {
+            params["protocols"] = protocols
+        }
+        
         return params
     }
 }
 
-struct SwapETO {
+struct SwapParameters {
     var fromTokenAddress: String
     var toTokenAddress: String
     var amount: String
