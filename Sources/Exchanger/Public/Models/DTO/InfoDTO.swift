@@ -25,7 +25,8 @@ public enum TagDTO: String, Decodable {
 }
 
 public struct PresentsConfigurationDTO: Decodable {
-    public let maxResult, lowestGas: [GasDTO]
+    public let maxResult: [GasDTO]?
+    public let lowestGas: [GasDTO]?
 
     enum CodingKeys: String, CodingKey {
         case maxResult = "MAX_RESULT"
@@ -38,5 +39,17 @@ public struct GasDTO: Decodable {
 }
 
 public struct LiquiditySourcesDTO: Decodable {
-    public let protocols: [ProtocolElement]
+    public let protocols: [LiquidityProtocol]
+}
+
+public struct LiquidityProtocol: Decodable {
+    public let id: String
+    public let title: String
+    public let img: String
+    public let imgColor: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case imgColor = "img_color"
+        case id, title, img
+    }
 }

@@ -56,7 +56,31 @@ final class ExchangerTests: XCTestCase {
         
         switch presents {
         case .success(let dto):
-            print(dto)
+            dto.lowestGas?.forEach({
+                print($0)
+                print("")
+            })
+            
+            dto.maxResult?.forEach({
+                print($0)
+                print("")
+            })
+            XCTAssert(true)
+        case .failure(let error):
+            print(error.localizedDescription)
+            XCTAssert(false)
+        }
+    }
+    
+    func testLiquidity() async {
+        let liq = await exchange.liquiditySources(blockchain: .ethereum)
+        
+        switch liq {
+        case .success(let dto):
+            dto.protocols.forEach({
+                print($0)
+                print("")
+            })
             XCTAssert(true)
         case .failure(let error):
             print(error.localizedDescription)
