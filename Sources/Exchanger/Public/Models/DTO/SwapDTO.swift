@@ -3,7 +3,7 @@ import Foundation
 public struct QuoteDTO: Decodable {
     public let fromToken, toToken: Token
     public let toTokenAmount, fromTokenAmount: String
-    public let protocols: [ProtocolElement]
+    public let protocols: [[[ProtocolElement]]]
     public let estimatedGas: Int
 }
 
