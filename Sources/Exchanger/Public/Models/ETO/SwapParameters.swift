@@ -1,16 +1,16 @@
 import Foundation
 
-struct QuoteParameters {
-    var fromTokenAddress: String
-    var toTokenAddress: String
-    var amount: String
-    var protocols: String?
-    var fee: String?
-    var gasLimit: String?
-    var complexityLevel: String?
-    var mainRouteParts: String?
-    var parts: String?
-    var gasPrice: String?
+public struct QuoteParameters {
+    public var fromTokenAddress: String
+    public var toTokenAddress: String
+    public var amount: String
+    public var protocols: String?
+    public var fee: String?
+    public var gasLimit: String?
+    public var complexityLevel: String?
+    public var mainRouteParts: String?
+    public var parts: String?
+    public var gasPrice: String?
     
     func parameters() -> [String: Any] {
         var params: [String: Any] = [
@@ -51,25 +51,25 @@ struct QuoteParameters {
     }
 }
 
-struct SwapParameters {
-    var fromTokenAddress: String
-    var toTokenAddress: String
-    var amount: String
-    var fromAddress: String
-    var slippage: String
-    var disableEstimate: Bool?
-    var protocols: String?
-    var destReceiver: String?
-    var referrerAddress: String?
-    var fee: String?
-    var burnChi: Bool?
-    var allowPartialFill: Bool?
-    var parts: String?
-    var mainRouteParts: String?
-    var connectorTokens: String?
-    var complexityLevel: String?
-    var gasLimit: String?
-    var gasPrice: String?
+public struct SwapParameters {
+    public var fromTokenAddress: String
+    public var toTokenAddress: String
+    public var amount: String
+    public var fromAddress: String
+    public var slippage: String
+    public var disableEstimate: Bool?
+    public var protocols: String?
+    public var destReceiver: String?
+    public var referrerAddress: String?
+    public var fee: String?
+    public var burnChi: Bool?
+    public var allowPartialFill: Bool?
+    public var parts: String?
+    public var mainRouteParts: String?
+    public var connectorTokens: String?
+    public var complexityLevel: String?
+    public var gasLimit: String?
+    public var gasPrice: String?
     
     func parameters() -> [String: Any] {
         var params: [String: Any] = [

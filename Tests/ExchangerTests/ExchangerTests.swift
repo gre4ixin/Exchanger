@@ -36,7 +36,7 @@ final class ExchangerTests: XCTestCase {
     }
     
     func testInfoTokens() async {
-        let tokens = await exchange.tokens(blockchain: .ethereum)
+        let tokens = await exchange.tokens(blockchain: .BSC)
         
         switch tokens {
         case .success(let dto):
@@ -81,6 +81,23 @@ final class ExchangerTests: XCTestCase {
                 print($0)
                 print("")
             })
+            XCTAssert(true)
+        case .failure(let error):
+            print(error.localizedDescription)
+            XCTAssert(false)
+        }
+    }
+    
+    func testGeneratingSwap() async {
+        let response = await exchange.swap(blockchain: .BSC, parameters:
+                                            SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                                           toTokenAddress: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+                                                           amount: "100000000000000",
+                                                           fromAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                                           slippage: "1"))
+        switch response {
+        case .success(let dto):
+            print(dto)
             XCTAssert(true)
         case .failure(let error):
             print(error.localizedDescription)

@@ -11,6 +11,17 @@ public protocol ExchangeFacade: AnyObject {
     func tokens(blockchain: ExchangeBlockchain) async -> Result<InfoTokensDTO, Error>
     func presents(blockchain: ExchangeBlockchain) async -> Result<PresentsConfigurationDTO, Error>
     func liquiditySources(blockchain: ExchangeBlockchain) async -> Result<LiquiditySourcesDTO, Error>
+    
+    /// Find best quote to exchange
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - parameters: parameters for exchange
+    func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, Error>
+    /// Generating data for exchange
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - parameters: parameters for exchange
+    func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, Error>
 }
 
 public class ExchangeService: ExchangeFacade {
@@ -65,6 +76,36 @@ public class ExchangeService: ExchangeFacade {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: InfoTarget.liquiditySources(blockchain: blockchain)), decodeTo: LiquiditySourcesDTO.self)
+                
+                switch response {
+                case .success(let decodedResponse):
+                    continuation.resume(returning: .success(decodedResponse))
+                case .failure(let error):
+                    continuation.resume(returning: .failure(error))
+                }
+            }
+        })
+    }
+    
+    public func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, Error> {
+        await withCheckedContinuation({ continuation in
+            Task {
+                let response = await networkFacade.request(with: DexTarget(target: SwapTarget.quote(blockchain: blockchain, parameters: parameters)), decodeTo: QuoteDTO.self)
+                
+                switch response {
+                case .success(let decodedResponse):
+                    continuation.resume(returning: .success(decodedResponse))
+                case .failure(let error):
+                    continuation.resume(returning: .failure(error))
+                }
+            }
+        })
+    }
+    
+    public func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, Error> {
+        await withCheckedContinuation({ continuation in
+            Task {
+                let response = await networkFacade.request(with: DexTarget(target: SwapTarget.swap(blockchain: blockchain, parameters: parameters)), decodeTo: SwapDTO.self)
                 
                 switch response {
                 case .success(let decodedResponse):
