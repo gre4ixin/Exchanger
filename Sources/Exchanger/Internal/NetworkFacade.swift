@@ -45,7 +45,8 @@ class NetworkFacade {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
                             continuation.resume(returning: .failure(errorResponse))
                         } else {
-                            continuation.resume(returning: .failure(ErrorDTO(statusCode: 500)))
+                            let description = String(data: response.data, encoding: .utf8) ?? ""
+                            continuation.resume(returning: .failure(ErrorDTO(statusCode: 500, description: description)))
                         }
                         return
                     }

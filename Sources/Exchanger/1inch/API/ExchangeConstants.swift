@@ -9,6 +9,8 @@ public enum ExchangeBlockchain {
     case gnosisChain
     case avalanche
     case fantom
+    case klayth
+    case aurora
     
     var id: String {
         switch self {
@@ -28,6 +30,10 @@ public enum ExchangeBlockchain {
             return "43114"
         case .fantom:
             return "250"
+        case .klayth:
+            return "8217"
+        case .aurora:
+            return "1313161554"
         }
     }
 }
