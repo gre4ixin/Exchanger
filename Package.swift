@@ -24,7 +24,6 @@ let package = Package(
             name: "Exchanger",
             dependencies: [
                 .product(name: "Moya", package: "Moya"),
-                .product(name: "CombineMoya", package: "Moya")
             ]),
         .testTarget(
             name: "ExchangerTests",
