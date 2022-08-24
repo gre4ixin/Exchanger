@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
     s.swift_version = "5.0"
     s.frameworks = "Combine"
     s.dependency 'Moya', '~> 15.0.0'
+    s.dependency 'CombineMoya', '~> 15.0.0'
 end
