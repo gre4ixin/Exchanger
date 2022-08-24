@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "13.0"
     s.source = { :git => 'https://github.com/gre4ixin/Exchanger.git', :tag => '1.0.0' }
     s.author = "Pavel"
-    s.source_files = "Sources/Exchanger/**"
+    s.source_files = "Sources/Exchanger/**/*.swift"
     s.swift_version = "5.0"
     s.frameworks = "Combine"
     s.dependency 'Moya', '~> 15.0.0'
