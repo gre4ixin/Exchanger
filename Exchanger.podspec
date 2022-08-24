@@ -2,6 +2,7 @@ Pod::Spec.new do |s|
     s.name = "Exchanger"
     s.version = "0.0.1"
     s.summary = "Summary"
+    s.homepage = 'https://github.com/gre4ixin/Exchanger'
     s.description  = "Description"
     s.license = { :type => "MIT", :file => "License.md" }
     s.ios.deployment_target = "13.0"
