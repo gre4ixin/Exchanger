@@ -7,3 +7,11 @@ DerivedData/
 .swiftpm/config/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
+
+ExchangerExample/ExchangerExample.xcworkspace/xcshareddata/
+
+*.xcworkspacedata
+
+*.lock
+
+ExchangerExample/Pods/*

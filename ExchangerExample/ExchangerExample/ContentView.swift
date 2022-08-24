@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Exchanger
 
 struct ContentView: View {
     var body: some View {

@@ -11,14 +11,18 @@
 		65469D5A28B6546A0092138F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65469D5928B6546A0092138F /* ContentView.swift */; };
 		65469D5C28B6546D0092138F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65469D5B28B6546D0092138F /* Assets.xcassets */; };
 		65469D5F28B6546D0092138F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65469D5E28B6546D0092138F /* Preview Assets.xcassets */; };
+		838F91C82DE735A92AB2165D /* Pods_ExchangerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7182AE1A5962B3755FCCE3 /* Pods_ExchangerExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013CA5AA7607475809E4C0AA /* Pods-ExchangerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExchangerExample.release.xcconfig"; path = "Target Support Files/Pods-ExchangerExample/Pods-ExchangerExample.release.xcconfig"; sourceTree = "<group>"; };
+		5E7182AE1A5962B3755FCCE3 /* Pods_ExchangerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExchangerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65469D5428B6546A0092138F /* ExchangerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExchangerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65469D5728B6546A0092138F /* ExchangerExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangerExampleApp.swift; sourceTree = "<group>"; };
 		65469D5928B6546A0092138F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		65469D5B28B6546D0092138F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65469D5E28B6546D0092138F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A225D5E193AC11F0FBCD8041 /* Pods-ExchangerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExchangerExample.debug.xcconfig"; path = "Target Support Files/Pods-ExchangerExample/Pods-ExchangerExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				838F91C82DE735A92AB2165D /* Pods_ExchangerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +42,8 @@
 			children = (
 				65469D5628B6546A0092138F /* ExchangerExample */,
 				65469D5528B6546A0092138F /* Products */,
+				86B222AA4F9F3615E8B29765 /* Pods */,
+				F8A9BAD201FF4F0EE63B56F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		86B222AA4F9F3615E8B29765 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A225D5E193AC11F0FBCD8041 /* Pods-ExchangerExample.debug.xcconfig */,
+				013CA5AA7607475809E4C0AA /* Pods-ExchangerExample.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F8A9BAD201FF4F0EE63B56F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E7182AE1A5962B3755FCCE3 /* Pods_ExchangerExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65469D6228B6546D0092138F /* Build configuration list for PBXNativeTarget "ExchangerExample" */;
 			buildPhases = (
+				2B630CCF371451CC916E2641 /* [CP] Check Pods Manifest.lock */,
 				65469D5028B6546A0092138F /* Sources */,
 				65469D5128B6546A0092138F /* Frameworks */,
 				65469D5228B6546A0092138F /* Resources */,
+				B37BD5A4115DE4D2464B2F52 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2B630CCF371451CC916E2641 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ExchangerExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B37BD5A4115DE4D2464B2F52 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ExchangerExample/Pods-ExchangerExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ExchangerExample/Pods-ExchangerExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExchangerExample/Pods-ExchangerExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		65469D5028B6546A0092138F /* Sources */ = {
@@ -261,6 +330,7 @@
 		};
 		65469D6328B6546D0092138F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A225D5E193AC11F0FBCD8041 /* Pods-ExchangerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -289,6 +359,7 @@
 		};
 		65469D6428B6546D0092138F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 013CA5AA7607475809E4C0AA /* Pods-ExchangerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
