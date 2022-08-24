@@ -17,6 +17,7 @@ public protocol ExchangeFacade: AnyObject {
     ///   - blockchain: blockchain type
     ///   - parameters: parameters for exchange
     func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, ErrorDTO>
+    
     /// Generating data for exchange
     /// - Parameters:
     ///   - blockchain: blockchain type
