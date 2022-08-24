@@ -1,14 +1,27 @@
 import Foundation
 
-struct ErrorDTO: Decodable, Error {
-    let statusCode: Int
-    let error: String
-    let description: String
-    let requestId: String
-    let meta: Meta
+public struct ErrorDTO: Decodable, Error {
+    public let statusCode: Int
+    public let error: String
+    public let description: String
+    public let requestId: String
+    public let meta: Meta
     
-    struct Meta: Decodable {
-        let type: String
-        let value: String
+    public struct Meta: Decodable {
+        public let type: String
+        public let value: String
+        
+        internal init(type: String = "", value: String = "") {
+            self.type = type
+            self.value = value
+        }
+    }
+    
+    internal init(statusCode: Int, error: String = "", description: String = "", requestId: String = "", meta: ErrorDTO.Meta = .init()) {
+        self.statusCode = statusCode
+        self.error = error
+        self.description = description
+        self.requestId = requestId
+        self.meta = meta
     }
 }

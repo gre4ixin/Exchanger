@@ -3,31 +3,31 @@ import Foundation
 public protocol ExchangeFacade: AnyObject {
     /// Check status of service
     /// - Parameter blockchain: blockchain
-    func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheckDTO, Error>
+    func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheckDTO, ErrorDTO>
     
     /// blockchainID/tokens
     /// - Parameter blockchain: ExchangeBlockchain type
     /// - Returns: request result
-    func tokens(blockchain: ExchangeBlockchain) async -> Result<InfoTokensDTO, Error>
-    func presents(blockchain: ExchangeBlockchain) async -> Result<PresentsConfigurationDTO, Error>
-    func liquiditySources(blockchain: ExchangeBlockchain) async -> Result<LiquiditySourcesDTO, Error>
+    func tokens(blockchain: ExchangeBlockchain) async -> Result<InfoTokensDTO, ErrorDTO>
+    func presents(blockchain: ExchangeBlockchain) async -> Result<PresentsConfigurationDTO, ErrorDTO>
+    func liquiditySources(blockchain: ExchangeBlockchain) async -> Result<LiquiditySourcesDTO, ErrorDTO>
     
     /// Find best quote to exchange
     /// - Parameters:
     ///   - blockchain: blockchain type
     ///   - parameters: parameters for exchange
-    func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, Error>
+    func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, ErrorDTO>
     /// Generating data for exchange
     /// - Parameters:
     ///   - blockchain: blockchain type
     ///   - parameters: parameters for exchange
-    func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, Error>
+    func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, ErrorDTO>
 }
 
 public class ExchangeService: ExchangeFacade {
     private let networkFacade: NetworkFacade = NetworkFacade()
     
-    public func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheckDTO, Error> {
+    public func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheckDTO, ErrorDTO> {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: HealthCheckTarget.healthCheck(blockChain: blockchain)), decodeTo: HealthCheckDTO.self)
@@ -42,7 +42,7 @@ public class ExchangeService: ExchangeFacade {
         })
     }
     
-    public func tokens(blockchain: ExchangeBlockchain) async -> Result<InfoTokensDTO, Error> {
+    public func tokens(blockchain: ExchangeBlockchain) async -> Result<InfoTokensDTO, ErrorDTO> {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: InfoTarget.tokens(blockchain: blockchain)), decodeTo: InfoTokensDTO.self)
@@ -57,7 +57,7 @@ public class ExchangeService: ExchangeFacade {
         })
     }
     
-    public func presents(blockchain: ExchangeBlockchain) async -> Result<PresentsConfigurationDTO, Error> {
+    public func presents(blockchain: ExchangeBlockchain) async -> Result<PresentsConfigurationDTO, ErrorDTO> {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: InfoTarget.presets(blockchain: blockchain)), decodeTo: PresentsConfigurationDTO.self)
@@ -72,7 +72,7 @@ public class ExchangeService: ExchangeFacade {
         })
     }
     
-    public func liquiditySources(blockchain: ExchangeBlockchain) async -> Result<LiquiditySourcesDTO, Error> {
+    public func liquiditySources(blockchain: ExchangeBlockchain) async -> Result<LiquiditySourcesDTO, ErrorDTO> {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: InfoTarget.liquiditySources(blockchain: blockchain)), decodeTo: LiquiditySourcesDTO.self)
@@ -87,7 +87,7 @@ public class ExchangeService: ExchangeFacade {
         })
     }
     
-    public func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, Error> {
+    public func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteDTO, ErrorDTO> {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: SwapTarget.quote(blockchain: blockchain, parameters: parameters)), decodeTo: QuoteDTO.self)
@@ -102,7 +102,7 @@ public class ExchangeService: ExchangeFacade {
         })
     }
     
-    public func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, Error> {
+    public func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, ErrorDTO> {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: SwapTarget.swap(blockchain: blockchain, parameters: parameters)), decodeTo: SwapDTO.self)

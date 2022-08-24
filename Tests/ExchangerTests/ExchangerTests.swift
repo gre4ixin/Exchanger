@@ -73,7 +73,7 @@ final class ExchangerTests: XCTestCase {
         let response = await exchange.swap(blockchain: .BSC,
                                            parameters: SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                                                                       toTokenAddress: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
-                                                                      amount: "10000000000000000",
+                                                                      amount: "1000000000000000000",
                                                                       fromAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                                                                       slippage: "1"))
         switch response {
