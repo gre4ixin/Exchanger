@@ -56,7 +56,7 @@ public struct SwapParameters {
     public var toTokenAddress: String
     public var amount: String
     public var fromAddress: String
-    public var slippage: String
+    public var slippage: Int
     public var disableEstimate: Bool?
     public var protocols: String?
     public var destReceiver: String?
@@ -77,7 +77,7 @@ public struct SwapParameters {
             "toTokenAddress": toTokenAddress,
             "amount": amount,
             "fromAddress": fromAddress,
-            "slippage": slippage
+            "slippage": "\(slippage)"
         ]
         if let disableEstimate = disableEstimate {
             params["disableEstimate"] = disableEstimate
