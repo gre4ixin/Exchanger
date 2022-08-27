@@ -36,9 +36,9 @@ class NetworkFacade {
     }
     
     func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) async -> Result<T, ErrorDTO> {
-        await withCheckedContinuation({ continuation in
-            provider.request(target) { [weak self] result in
-                guard let self = self else { return }
+        let asyncRequestWrapper = AsyncMoyaRequestWrapper<T> { [weak self] continuation in
+            guard let self = self else { return nil }
+            return self.provider.request(target) { result in
                 switch result {
                 case .success(let response):
                     guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
@@ -55,6 +55,14 @@ class NetworkFacade {
                     continuation.resume(returning: .failure(ErrorDTO(statusCode: error.errorCode)))
                 }
             }
+        }
+        
+        return await withTaskCancellationHandler(handler: {
+            asyncRequestWrapper.cancel()
+        }, operation: {
+            await withCheckedContinuation({ continuation in
+                asyncRequestWrapper.perform(continuation: continuation)
+            })
         })
     }
 }
