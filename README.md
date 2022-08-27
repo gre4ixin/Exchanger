@@ -19,7 +19,6 @@ Task {
 }
 
 // Generation swap data
-
 Task { 
     let amount = 1_000_000_000_000_000_000
     let fromAddress = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
