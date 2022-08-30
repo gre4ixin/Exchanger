@@ -1,9 +1,9 @@
 import Foundation
 
 public enum ExchangeError: Error {
-    case unknownError
-    case nonServerSideError(withError: Error)
-    case serverError(withInfo: ErrorDTO)
+    case unknownError(statusCode: Int?)
+    case serverError(withError: Error)
+    case parsedError(withInfo: ErrorDTO)
 }
 
 public struct ErrorDTO: Decodable, Error {

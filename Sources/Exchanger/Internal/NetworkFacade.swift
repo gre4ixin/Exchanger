@@ -20,15 +20,15 @@ class NetworkFacade {
                     case .success(let response):
                         guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
                             if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
-                                promise(.failure(.serverError(withInfo: errorResponse)))
+                                promise(.failure(.parsedError(withInfo: errorResponse)))
                             } else {
-                                promise(.failure(.unknownError))
+                                promise(.failure(.unknownError(statusCode: 500)))
                             }
                             return
                         }
                         promise(.success(object))
                     case .failure(let error):
-                        promise(.failure(.nonServerSideError(withError: error)))
+                        promise(.failure(.serverError(withError: error)))
                     }
                 }
             }
@@ -43,15 +43,15 @@ class NetworkFacade {
                 case .success(let response):
                     guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
-                            continuation.resume(returning: .failure(.serverError(withInfo: errorResponse)))
+                            continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
                         } else {
-                            continuation.resume(returning: .failure(.unknownError))
+                            continuation.resume(returning: .failure(.unknownError(statusCode: 500)))
                         }
                         return
                     }
                     continuation.resume(returning: .success(object))
                 case .failure(let error):
-                    continuation.resume(returning: .failure(.nonServerSideError(withError: error)))
+                    continuation.resume(returning: .failure(.serverError(withError: error)))
                 }
             }
         }
