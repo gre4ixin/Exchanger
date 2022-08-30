@@ -24,8 +24,21 @@ public protocol ExchangeFacade: AnyObject {
     ///   - parameters: parameters for exchange
     func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, ErrorDTO>
     
+    /// Address of the 1inch router that must be trusted to spend funds for the exchange
+    /// - Parameter blockchain: blockchain type
+    /// - Returns: parameters for exchange
     func spender(blockchain: ExchangeBlockchain) async -> Result<ApproveSpenderDTO, ErrorDTO>
+    
+    /// Generate data for calling the contract in order to allow the 1inch router to spend funds
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - approveTransactionParameters: parameters for exchange
     func approveTransaction(blockchain: ExchangeBlockchain, approveTransactionParameters: ApproveTransactionParameters) async -> Result<ApproveTransactionDTO, ErrorDTO>
+    
+    /// Get the number of tokens that the 1inch router is allowed to spend
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - allowanceParameters: parameters for exchange
     func allowance(blockchain: ExchangeBlockchain, allowanceParameters: ApproveAllowanceParameters) async -> Result<ApproveAllowanceDTO, ErrorDTO>
 }
 
