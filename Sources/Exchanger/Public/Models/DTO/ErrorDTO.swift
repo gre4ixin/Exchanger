@@ -1,5 +1,11 @@
 import Foundation
 
+public enum ExchangeError: Error {
+    case unknownError
+    case nonServerSideError(withError: Error)
+    case serverError(withInfo: ErrorDTO)
+}
+
 public struct ErrorDTO: Decodable, Error {
     public let statusCode: Int
     public let error: String
