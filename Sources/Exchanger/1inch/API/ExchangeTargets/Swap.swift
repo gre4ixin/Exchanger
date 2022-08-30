@@ -10,7 +10,7 @@ enum SwapTarget {
 
 extension SwapTarget: TargetType {
     var baseURL: URL {
-        InchAPIConstants.baseAPI
+        InchAPIConstants.exchangeAPIBaseURL
     }
     
     var path: String {

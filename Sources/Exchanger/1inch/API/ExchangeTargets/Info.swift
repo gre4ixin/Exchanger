@@ -11,7 +11,7 @@ enum InfoTarget {
 
 extension InfoTarget: TargetType {
     var baseURL: URL {
-        InchAPIConstants.baseAPI
+        InchAPIConstants.exchangeAPIBaseURL
     }
     
     var path: String {

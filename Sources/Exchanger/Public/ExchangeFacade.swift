@@ -23,6 +23,10 @@ public protocol ExchangeFacade: AnyObject {
     ///   - blockchain: blockchain type
     ///   - parameters: parameters for exchange
     func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapDTO, ErrorDTO>
+    
+    func spender(blockchain: ExchangeBlockchain) async -> Result<ApproveSpenderDTO, ErrorDTO>
+    func approveTransaction(blockchain: ExchangeBlockchain, approveTransactionParameters: ApproveTransactionParameters) async -> Result<ApproveTransactionDTO, ErrorDTO>
+    func allowance(blockchain: ExchangeBlockchain, allowanceParameters: ApproveAllowanceParameters) async -> Result<ApproveAllowanceDTO, ErrorDTO>
 }
 
 public class ExchangeService: ExchangeFacade {
@@ -107,6 +111,51 @@ public class ExchangeService: ExchangeFacade {
         await withCheckedContinuation({ continuation in
             Task {
                 let response = await networkFacade.request(with: DexTarget(target: SwapTarget.swap(blockchain: blockchain, parameters: parameters)), decodeTo: SwapDTO.self)
+                
+                switch response {
+                case .success(let decodedResponse):
+                    continuation.resume(returning: .success(decodedResponse))
+                case .failure(let error):
+                    continuation.resume(returning: .failure(error))
+                }
+            }
+        })
+    }
+    
+    public func spender(blockchain: ExchangeBlockchain) async -> Result<ApproveSpenderDTO, ErrorDTO> {
+        await withCheckedContinuation({ continuation in
+            Task {
+                let response = await networkFacade.request(with: DexTarget(target: InchApprove.spender(blockChain: blockchain)), decodeTo: ApproveSpenderDTO.self)
+                
+                switch response {
+                case .success(let decodedResponse):
+                    continuation.resume(returning: .success(decodedResponse))
+                case .failure(let error):
+                    continuation.resume(returning: .failure(error))
+                }
+            }
+        })
+    }
+    
+    public func approveTransaction(blockchain: ExchangeBlockchain, approveTransactionParameters: ApproveTransactionParameters) async -> Result<ApproveTransactionDTO, ErrorDTO> {
+        await withCheckedContinuation({ continuation in
+            Task {
+                let response = await networkFacade.request(with: DexTarget(target: InchApprove.transaction(blockChain: blockchain, params: approveTransactionParameters)), decodeTo: ApproveTransactionDTO.self)
+                
+                switch response {
+                case .success(let decodedResponse):
+                    continuation.resume(returning: .success(decodedResponse))
+                case .failure(let error):
+                    continuation.resume(returning: .failure(error))
+                }
+            }
+        })
+    }
+    
+    public func allowance(blockchain: ExchangeBlockchain, allowanceParameters: ApproveAllowanceParameters) async -> Result<ApproveAllowanceDTO, ErrorDTO> {
+        await withCheckedContinuation({ continuation in
+            Task {
+                let response = await networkFacade.request(with: DexTarget(target: InchApprove.allowance(blockChain: blockchain, params: allowanceParameters)), decodeTo: ApproveAllowanceDTO.self)
                 
                 switch response {
                 case .success(let decodedResponse):
