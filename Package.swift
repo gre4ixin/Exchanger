@@ -12,7 +12,10 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "Exchanger",
-            targets: ["Exchanger", "ExchangerTests"]),
+            targets: [
+                "Exchanger",
+                "ExchangerTests"
+            ]),
     ],
     dependencies: [
         .package(url: "https://github.com/Moya/Moya.git", exact: Version(15, 0, 0)),
@@ -27,6 +30,8 @@ let package = Package(
             ]),
         .testTarget(
             name: "ExchangerTests",
-            dependencies: ["Exchanger"]),
+            dependencies: [
+                "Exchanger"
+            ]),
     ]
 )
