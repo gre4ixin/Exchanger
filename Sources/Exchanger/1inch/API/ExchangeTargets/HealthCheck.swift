@@ -7,7 +7,7 @@ enum HealthCheckTarget {
 
 extension HealthCheckTarget: TargetType {
     var baseURL: URL {
-        return InchAPIConstants.baseAPI
+        InchAPIConstants.exchangeAPIBaseURL
     }
     
     var path: String {

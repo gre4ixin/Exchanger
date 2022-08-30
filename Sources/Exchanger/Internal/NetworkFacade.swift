@@ -11,7 +11,7 @@ class NetworkFacade {
         return decoder
     }
     
-    func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) -> AnyPublisher<T, ErrorDTO> {
+    func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) -> AnyPublisher<T, ExchangeError> {
         Deferred {
             Future { [weak self] promise in
                 guard let self = self else { return }
@@ -20,22 +20,22 @@ class NetworkFacade {
                     case .success(let response):
                         guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
                             if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
-                                promise(.failure(errorResponse))
+                                promise(.failure(.parsedError(withInfo: errorResponse)))
                             } else {
-                                promise(.failure(.init(statusCode: 500)))
+                                promise(.failure(.unknownError(statusCode: 500)))
                             }
                             return
                         }
                         promise(.success(object))
                     case .failure(let error):
-                        promise(.failure(.init(statusCode: error.errorCode)))
+                        promise(.failure(.serverError(withError: error)))
                     }
                 }
             }
         }.eraseToAnyPublisher()
     }
     
-    func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) async -> Result<T, ErrorDTO> {
+    func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) async -> Result<T, ExchangeError> {
         let asyncRequestWrapper = AsyncMoyaRequestWrapper<T> { [weak self] continuation in
             guard let self = self else { return nil }
             return self.provider.request(target) { result in
@@ -43,16 +43,15 @@ class NetworkFacade {
                 case .success(let response):
                     guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
-                            continuation.resume(returning: .failure(errorResponse))
+                            continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
                         } else {
-                            let description = String(data: response.data, encoding: .utf8) ?? ""
-                            continuation.resume(returning: .failure(ErrorDTO(statusCode: 500, description: description)))
+                            continuation.resume(returning: .failure(.unknownError(statusCode: 500)))
                         }
                         return
                     }
                     continuation.resume(returning: .success(object))
                 case .failure(let error):
-                    continuation.resume(returning: .failure(ErrorDTO(statusCode: error.errorCode)))
+                    continuation.resume(returning: .failure(.serverError(withError: error)))
                 }
             }
         }

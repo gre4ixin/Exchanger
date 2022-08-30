@@ -3,13 +3,13 @@ import Moya
 
 enum InchApprove {
     case spender(blockChain: ExchangeBlockchain)
-    case transaction(blockChain: ExchangeBlockchain, params: ApproveTransaction)
-    case allowance(blockChain: ExchangeBlockchain, params: ApproveAllowance)
+    case transaction(blockChain: ExchangeBlockchain, params: ApproveTransactionParameters)
+    case allowance(blockChain: ExchangeBlockchain, params: ApproveAllowanceParameters)
 }
 
 extension InchApprove: TargetType {
     var baseURL: URL {
-        InchAPIConstants.baseAPI
+        InchAPIConstants.exchangeAPIBaseURL
     }
     
     var path: String {

@@ -1,5 +1,6 @@
 import Foundation
 
+//MARK: - Quote
 public struct QuoteDTO: Decodable {
     public let fromToken, toToken: Token
     public let toTokenAmount, fromTokenAmount: String
@@ -19,6 +20,7 @@ public struct ProtocolElement: Decodable {
     public let fromTokenAddress, toTokenAddress: String
 }
 
+//MARK: - Swap
 public struct SwapDTO: Decodable {
     public let fromToken, toToken: SwapTokenDTO
     public let toTokenAmount, fromTokenAmount: String
