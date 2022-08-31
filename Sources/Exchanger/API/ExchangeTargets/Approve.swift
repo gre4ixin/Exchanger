@@ -9,7 +9,7 @@ enum InchApprove {
 
 extension InchApprove: TargetType {
     var baseURL: URL {
-        InchAPIConstants.exchangeAPIBaseURL
+        ExchangeConstants.exchangeAPIBaseURL
     }
     
     var path: String {

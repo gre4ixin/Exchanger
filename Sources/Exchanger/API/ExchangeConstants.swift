@@ -1,6 +1,6 @@
 import Foundation
 
-struct InchAPIConstants {
+struct ExchangeConstants {
     enum APIVersion: String {
         case v1 = "v1.0"
         case v2 = "v2.0"
