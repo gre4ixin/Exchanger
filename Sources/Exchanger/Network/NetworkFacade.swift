@@ -1,6 +1,6 @@
 import Foundation
-import Moya
 import Combine
+import Moya
 
 class NetworkFacade {
     private let provider = MoyaProvider<DexTarget>()
@@ -41,6 +41,7 @@ class NetworkFacade {
             return self.provider.request(target) { result in
                 switch result {
                 case .success(let response):
+                    print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
                     guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
                             continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
@@ -51,6 +52,7 @@ class NetworkFacade {
                     }
                     continuation.resume(returning: .success(object))
                 case .failure(let error):
+                    print("URL REQUEST -> \(error.response?.request?.url?.absoluteString ?? "")")
                     continuation.resume(returning: .failure(.serverError(withError: error)))
                 }
             }
