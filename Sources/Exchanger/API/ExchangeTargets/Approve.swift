@@ -30,7 +30,7 @@ extension InchApprove: TargetType {
         case .spender:
             return .requestPlain
         case .transaction(_, let params):
-            return .requestParameters(parameters: ["tokenAddress": params.tokenAddress, "amount": "\(params.amount)"], encoding: URLEncoding())
+            return .requestParameters(parameters: params.parameters(), encoding: URLEncoding())
         case .allowance(_, let params):
             return .requestParameters(parameters: ["tokenAddress": params.tokenAddress, "walletAddress": params.walletAddress], encoding: URLEncoding())
         }
