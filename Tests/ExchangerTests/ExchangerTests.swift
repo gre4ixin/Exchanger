@@ -101,4 +101,47 @@ final class ExchangerTests: XCTestCase {
             XCTAssert(false)
         }
     }
+    
+    func testApproveSpender() async {
+        let response = await exchange.spender(blockchain: .polygon)
+        
+        switch response {
+        case .success(let dto):
+            print(dto)
+            XCTAssert(true)
+        case .failure(let error):
+            print(error.localizedDescription)
+            XCTAssert(false)
+        }
+    }
+    
+    func testApproveTransactionData() async {
+        let response = await exchange.approveTransaction(blockchain: .polygon, approveTransactionParameters: .init(
+            tokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+            amount: .specified(value: 10)))
+        
+        switch response {
+        case .success(let dto):
+            print(dto)
+            XCTAssert(true)
+        case .failure(let error):
+            print(error.localizedDescription)
+            XCTAssert(false)
+        }
+    }
+    
+    func testApproveAllowance() async {
+        let response = await exchange.allowance(blockchain: .polygon, allowanceParameters: .init(
+            tokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063", //DAI in polygon network
+            walletAddress: "0x2d45754375672e470E03beF24f4acC3cCD36973c")) //Your wallet address
+        
+        switch response {
+        case .success(let dto):
+            print(dto)
+            XCTAssert(true)
+        case .failure(let error):
+            print(error.localizedDescription)
+            XCTAssert(false)
+        }
+    }
 }
