@@ -2,6 +2,9 @@ import Foundation
 import Moya
 
 enum LimitOrderTarget {
+//    POST
+    case append(blockchain: ExchangeBlockchain, order: LimitOrderModel)
+//    GET
     case ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters)
     case allOrders(blockchain: ExchangeBlockchain, parameters: OrdersAllParameters)
     case countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses])
@@ -17,6 +20,8 @@ extension LimitOrderTarget: TargetType {
     
     var path: String {
         switch self {
+        case .append(let blockchain, _):
+            return "/\(blockchain.id)/limit-order"
         case .ordersForAddress(let blockchain, let parameters):
             return "/\(blockchain.id)/limit-order/address/\(parameters.address)"
         case .allOrders(let blockchain, _):
@@ -34,6 +39,8 @@ extension LimitOrderTarget: TargetType {
     
     var method: Moya.Method {
         switch self {
+        case .append:
+            return .post
         case .ordersForAddress, .allOrders, .countOrders, .events, .eventsForOrder, .hasActiveOrdersWithPermit:
             return .get
         }
@@ -41,6 +48,8 @@ extension LimitOrderTarget: TargetType {
     
     var task: Task {
         switch self {
+        case .append(_, let order):
+            return .requestJSONEncodable(order)
         case .ordersForAddress(_, let parameters):
             return .requestParameters(parameters: parameters.parameters(), encoding: URLEncoding())
         case .allOrders(_, let parameters):

@@ -2,14 +2,14 @@ import Foundation
 
 /// - limit-order/address/{address}
 /// - limit-order/all
-public struct LimitOrderDTO: Decodable {
+public struct LimitOrderModel: Codable {
     public let signature, orderHash, createDateTime, remainingMakerAmount: String
     public let makerBalance, makerAllowance: String
     public let data: MetaData
     public let makerRate, takerRate: String
     public let isMakerContract: Bool
     
-    public struct MetaData: Decodable {
+    public struct MetaData: Codable {
         /// maker asset -> "you sell"
         /// taker asset -> "you buy"
         public let makerAsset, takerAsset, getMakerAmount, getTakerAmount: String
