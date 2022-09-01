@@ -70,7 +70,9 @@ public struct OrdersAllParameters {
         var params: [String: Any] = [:]
         params["page"] = page
         params["limit"] = limit
-        params["statuses"] = "\(statuses.map({ $0.rawValue }).sorted())"
+        if !statuses.isEmpty {
+            params["statuses"] = "\(statuses.map({ $0.rawValue }).sorted())"
+        }
         if let takerAsset = takerAsset {
             params["takerAsset"] = takerAsset
         }
