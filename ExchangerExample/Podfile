@@ -4,5 +4,5 @@
 target 'ExchangerExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Exchanger', :git => 'https://github.com/gre4ixin/Exchanger.git', :tag => '1.0.3'
+  pod 'Exchanger', :git => 'https://github.com/gre4ixin/Exchanger.git', :tag => '1.0.4'
 end
