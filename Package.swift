@@ -27,11 +27,13 @@ let package = Package(
             name: "Exchanger",
             dependencies: [
                 .product(name: "Moya", package: "Moya"),
-            ]),
+            ]
+        ),
         .testTarget(
             name: "ExchangerTests",
             dependencies: [
                 "Exchanger"
-            ]),
+            ]
+        ),
     ]
 )
