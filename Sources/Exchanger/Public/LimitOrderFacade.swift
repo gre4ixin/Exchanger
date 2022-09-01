@@ -1,9 +1,29 @@
 import Foundation
 
 public protocol LimitOrderFacade: AnyObject {
+    /// Get limit order for specific address
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - parameters: parameters for request
+    /// - Returns: result of request
     func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderDTO], ExchangeError>
+    /// All orders in 1inch
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - parameters: parameters for request
+    /// - Returns: result of request
     func allOrders(blockchain: ExchangeBlockchain, parameters: OrdersAllParameters) async -> Result<[LimitOrderDTO], ExchangeError>
+    /// Count of all limit orders
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - statuses: array of filters [.valid, .temporaryInvalid, .invalid]
+    /// - Returns: result of request
     func countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses]) async -> Result<CountLimitOrdersDTO, ExchangeError>
+    /// Get all events
+    /// - Parameters:
+    ///   - blockchain: blockchain type
+    ///   - limit: count of events
+    /// - Returns: result request
     func events(blockchain: ExchangeBlockchain, limit: Int) async -> Result<[EventsLimitOrderDTO], ExchangeError>
     func hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain, walletAddress: String, tokenAddress: String) async -> Result<ActiveOrdersWithPermitDTO, ExchangeError>
 }
