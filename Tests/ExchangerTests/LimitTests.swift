@@ -2,7 +2,7 @@ import XCTest
 @testable import Exchanger
 
 final class LimitTests: XCTestCase {
-    let limit: LimitOrderFacade = LimitOrderService()
+    let limit: LimitOrderFacade = LimitOrderService(enableDebugMode: true)
     
     func testLimitForAddress() async {
         let response = await limit.ordersForAddress(blockchain: .polygon, parameters: .init(address: "0x2d45754375672e470E03beF24f4acC3cCD36973c"))

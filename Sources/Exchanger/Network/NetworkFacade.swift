@@ -3,7 +3,12 @@ import Combine
 import Moya
 
 class NetworkFacade {
+    let debugMode: Bool
     private let provider = MoyaProvider<DexTarget>()
+    
+    init(debugMode: Bool) {
+        self.debugMode = debugMode
+    }
     
     private var jsonDecoder: JSONDecoder {
         let decoder = JSONDecoder()
@@ -41,7 +46,10 @@ class NetworkFacade {
             return self.provider.request(target) { result in
                 switch result {
                 case .success(let response):
-                    print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
+                    if self.debugMode {
+                        print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
+                        self.responseDecoding(data: response.data, decodeTo: decodeTo)
+                    }
                     guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
                             continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
@@ -52,7 +60,9 @@ class NetworkFacade {
                     }
                     continuation.resume(returning: .success(object))
                 case .failure(let error):
-                    print("URL REQUEST -> \(error.response?.request?.url?.absoluteString ?? "")")
+                    if self.debugMode {
+                        print("URL REQUEST -> \(error.response?.request?.url?.absoluteString ?? "")")
+                    }
                     continuation.resume(returning: .failure(.serverError(withError: error)))
                 }
             }
@@ -65,5 +75,22 @@ class NetworkFacade {
                 asyncRequestWrapper.perform(continuation: continuation)
             })
         })
+    }
+    
+    private func responseDecoding<T: Decodable>(data: Data, decodeTo: T.Type) {
+        do {
+            let decodeJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            let dataJSON = try JSONSerialization.data(withJSONObject: decodeJSON, options: .prettyPrinted)
+            print(String(decoding: dataJSON, as: UTF8.self))
+        } catch {
+            print("Decoding response error -> \(error)")
+        }
+        
+        do {
+            _ = try jsonDecoder.decode(decodeTo, from: data)
+            print("Decode to object success")
+        } catch {
+            print("Decode to object error -> \(error)")
+        }
     }
 }
