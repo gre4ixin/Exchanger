@@ -47,7 +47,12 @@ public protocol ExchangeFacade: AnyObject {
 }
 
 public class ExchangeService: ExchangeFacade {
-    private let networkFacade: NetworkFacade = NetworkFacade()
+    let enableDebugMode: Bool
+    private lazy var networkFacade: NetworkFacade = NetworkFacade(debugMode: enableDebugMode)
+    
+    public init(enableDebugMode: Bool = false) {
+        self.enableDebugMode = enableDebugMode
+    }
     
     public func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheckDTO, ExchangeError> {
         await withCheckedContinuation({ continuation in

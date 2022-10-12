@@ -10,18 +10,11 @@ public struct TokenDTO: Decodable {
     let decimals: Int
     let address: String
     let logoURI: String
-    let tags: [TagDTO]
+    let tags: [String]
     let eip2612, isFoT: Bool?
     let domainVersion: String?
     let synth: Bool?
     let displayedSymbol: String?
-}
-
-public enum TagDTO: String, Decodable {
-    case native = "native"
-    case pools = "pools"
-    case savings = "savings"
-    case tokens = "tokens"
 }
 
 public struct PresentsConfigurationDTO: Decodable {

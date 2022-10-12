@@ -29,7 +29,12 @@ public protocol LimitOrderFacade: AnyObject {
 }
 
 public class LimitOrderService: LimitOrderFacade {
-    private let networkFacade: NetworkFacade = NetworkFacade()
+    let enableDebugMode: Bool
+    private lazy var networkFacade: NetworkFacade = NetworkFacade(debugMode: enableDebugMode)
+    
+    init(enableDebugMode: Bool) {
+        self.enableDebugMode = enableDebugMode
+    }
     
     public func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderModel], ExchangeError> {
         await withCheckedContinuation({ continuation in

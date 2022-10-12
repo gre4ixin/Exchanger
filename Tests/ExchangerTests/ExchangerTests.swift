@@ -2,7 +2,7 @@ import XCTest
 @testable import Exchanger
 
 final class ExchangerTests: XCTestCase {
-    let exchange: ExchangeFacade = ExchangeService()
+    let exchange: ExchangeFacade = ExchangeService(enableDebugMode: true)
     
     func testHealth() async {
         let health = await exchange.healthCheck(blockchain: .BSC)
@@ -33,7 +33,7 @@ final class ExchangerTests: XCTestCase {
     }
     
     func testPresents() async {
-        let presents = await exchange.presents(blockchain: .BSC)
+        let presents = await exchange.presents(blockchain: .polygon)
         
         switch presents {
         case .success(let dto):
@@ -88,9 +88,9 @@ final class ExchangerTests: XCTestCase {
     }
     
     func testQuote() async {
-        let response = await exchange.quote(blockchain: .BSC,
+        let response = await exchange.quote(blockchain: .polygon,
                                             parameters: QuoteParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-                                                                        toTokenAddress: "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+                                                                        toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
                                                                         amount: "10000000000000000"))
         switch response {
         case .success(let dto):
