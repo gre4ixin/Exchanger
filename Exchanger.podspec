@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
     s.summary = "Summary"
     s.homepage = 'https://github.com/gre4ixin/Exchanger '
     s.description  = "Description"
-    s.license = { :type => "MIT", :file => "License.md" }
+    s.license = { :type => "MIT", :file => "LICENSE" }
     s.ios.deployment_target = "13.0"
     s.source = { :git => 'https://github.com/gre4ixin/Exchanger.git', :tag => '1.0.5' }
     s.author = "Pavel"
