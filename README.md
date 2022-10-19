@@ -23,11 +23,13 @@ Task {
     let amount = 1_000_000_000_000_000_000
     let fromAddress = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
     let toAddress = "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063"
+    let walletAddress = "0x**..." //Your wallet address
+    
     let response = await exchange.swap(blockchain: .polygon,
                                        parameters: SwapParameters(fromTokenAddress: fromAddress,
                                                                   toTokenAddress: toAddress,
                                                                   amount: "\(amount)",
-                                                                  fromAddress: fromAddress,
+                                                                  fromAddress: walletAddress,
                                                                   slippage: 1))
     switch response {
     case .success(let dto):
