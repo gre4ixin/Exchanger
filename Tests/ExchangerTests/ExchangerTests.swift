@@ -75,7 +75,7 @@ final class ExchangerTests: XCTestCase {
                                            parameters: SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                                                                       toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
                                                                       amount: "\(amount)",
-                                                                      fromAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                                                      fromAddress: "0x2d45754375672e470E03beF24f4acC3cCD36973c",
                                                                       slippage: 1))
         switch response {
         case .success(let dto):
@@ -118,7 +118,7 @@ final class ExchangerTests: XCTestCase {
     func testApproveTransactionData() async {
         let response = await exchange.approveTransaction(blockchain: .polygon, approveTransactionParameters: .init(
             tokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
-            amount: .specified(value: 10)))
+            amount: .infinite))
         
         switch response {
         case .success(let dto):

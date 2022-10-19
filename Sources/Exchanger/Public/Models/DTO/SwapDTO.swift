@@ -24,7 +24,7 @@ public struct ProtocolElement: Decodable {
 public struct SwapDTO: Decodable {
     public let fromToken, toToken: SwapTokenDTO
     public let toTokenAmount, fromTokenAmount: String
-//    let protocols: [[[ProtocolElement]]]
+    let protocols: [[[ProtocolElement]]]
     public let tx: Tx
 }
 
@@ -39,6 +39,7 @@ public struct SwapTokenDTO: Decodable {
 public struct Tx: Codable {
     public let from, to, data, value: String
     public let gas: Int
+    //GWEI
     public let gasPrice: String
 }
 
