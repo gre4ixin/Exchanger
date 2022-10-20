@@ -46,7 +46,7 @@ public protocol ExchangeFacade: AnyObject {
                    allowanceParameters: ApproveAllowanceParameters) async -> Result<ApproveAllowanceDTO, ExchangeError>
 }
 
-public class ExchangeService: ExchangeFacade {
+public class ExchangeFacadeImpl: ExchangeFacade {
     let enableDebugMode: Bool
     private lazy var networkFacade: NetworkFacade = NetworkFacade(debugMode: enableDebugMode)
     

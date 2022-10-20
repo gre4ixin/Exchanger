@@ -2,7 +2,7 @@ import XCTest
 @testable import Exchanger
 
 final class ExchangerTests: XCTestCase {
-    let exchange: ExchangeFacade = ExchangeService(enableDebugMode: true)
+    let exchange: ExchangeFacade = ExchangeFacadeImpl(enableDebugMode: true)
     
     func testHealth() async {
         let health = await exchange.healthCheck(blockchain: .BSC)
