@@ -4,22 +4,26 @@ import Moya
 
 class NetworkFacade {
     let debugMode: Bool
-    private let provider = MoyaProvider<DexTarget>()
     
-    init(debugMode: Bool) {
-        self.debugMode = debugMode
-    }
-    
+//    MARK: - Private variable
     private var jsonDecoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
     
+    private let provider = MoyaProvider<DexTarget>()
+    
+    init(debugMode: Bool) {
+        self.debugMode = debugMode
+    }
+    
+//    MARK: - Internal methods
     func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) -> AnyPublisher<T, ExchangeError> {
         Deferred {
             Future { [weak self] promise in
                 guard let self = self else { return }
+                
                 self.provider.request(target) { result in
                     switch result {
                     case .success(let response):
@@ -43,6 +47,7 @@ class NetworkFacade {
     func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) async -> Result<T, ExchangeError> {
         let asyncRequestWrapper = AsyncMoyaRequestWrapper<T> { [weak self] continuation in
             guard let self = self else { return nil }
+            
             return self.provider.request(target) { result in
                 switch result {
                 case .success(let response):
@@ -58,6 +63,7 @@ class NetworkFacade {
                         }
                         return
                     }
+                    
                     continuation.resume(returning: .success(object))
                 case .failure(let error):
                     if self.debugMode {

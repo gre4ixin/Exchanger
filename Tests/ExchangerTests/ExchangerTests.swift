@@ -70,7 +70,7 @@ final class ExchangerTests: XCTestCase {
     }
     
     func testGeneratingSwap() async {
-        let amount = 1_000_000_000_000_000_000
+        let amount = 300_000_000_000_000_000
         let response = await exchange.swap(blockchain: .polygon,
                                            parameters: SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                                                                       toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",

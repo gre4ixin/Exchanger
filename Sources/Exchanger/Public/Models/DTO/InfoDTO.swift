@@ -1,20 +1,20 @@
 import Foundation
 
 public struct InfoTokensDTO: Decodable {
-    let tokens: [String: TokenDTO]
+    public let tokens: [String: TokenDTO]
 }
 
 // MARK: - Token
 public struct TokenDTO: Decodable {
-    let symbol, name: String
-    let decimals: Int
-    let address: String
-    let logoURI: String
-    let tags: [String]
-    let eip2612, isFoT: Bool?
-    let domainVersion: String?
-    let synth: Bool?
-    let displayedSymbol: String?
+    public let symbol, name: String
+    public let decimals: Int
+    public let address: String
+    public let logoURI: String
+    public let tags: [String]
+    public let eip2612, isFoT: Bool?
+    public let domainVersion: String?
+    public let synth: Bool?
+    public let displayedSymbol: String?
 }
 
 public struct PresentsConfigurationDTO: Decodable {
