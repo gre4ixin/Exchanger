@@ -12,6 +12,30 @@ public struct QuoteParameters {
     public var parts: String?
     public var gasPrice: String?
     
+    public init(
+        fromTokenAddress: String,
+        toTokenAddress: String,
+        amount: String,
+        protocols: String? = nil,
+        fee: String? = nil,
+        gasLimit: String? = nil,
+        complexityLevel: String? = nil,
+        mainRouteParts: String? = nil,
+        parts: String? = nil,
+        gasPrice: String? = nil
+    ) {
+        self.fromTokenAddress = fromTokenAddress
+        self.toTokenAddress = toTokenAddress
+        self.amount = amount
+        self.protocols = protocols
+        self.fee = fee
+        self.gasLimit = gasLimit
+        self.complexityLevel = complexityLevel
+        self.mainRouteParts = mainRouteParts
+        self.parts = parts
+        self.gasPrice = gasPrice
+    }
+    
     func parameters() -> [String: Any] {
         var params: [String: Any] = [
             "fromTokenAddress": fromTokenAddress,
@@ -70,6 +94,46 @@ public struct SwapParameters {
     public var complexityLevel: String?
     public var gasLimit: String?
     public var gasPrice: String?
+    
+    public init(
+        fromTokenAddress: String,
+        toTokenAddress: String,
+        amount: String,
+        fromAddress: String,
+        slippage: Int,
+        disableEstimate: Bool? = nil,
+        protocols: String? = nil,
+        destReceiver: String? = nil,
+        referrerAddress: String? = nil,
+        fee: String? = nil,
+        burnChi: Bool? = nil,
+        allowPartialFill: Bool? = nil,
+        parts: String? = nil,
+        mainRouteParts: String? = nil,
+        connectorTokens: String? = nil,
+        complexityLevel: String? = nil,
+        gasLimit: String? = nil,
+        gasPrice: String? = nil
+    ) {
+        self.fromTokenAddress = fromTokenAddress
+        self.toTokenAddress = toTokenAddress
+        self.amount = amount
+        self.fromAddress = fromAddress
+        self.slippage = slippage
+        self.disableEstimate = disableEstimate
+        self.protocols = protocols
+        self.destReceiver = destReceiver
+        self.referrerAddress = referrerAddress
+        self.fee = fee
+        self.burnChi = burnChi
+        self.allowPartialFill = allowPartialFill
+        self.parts = parts
+        self.mainRouteParts = mainRouteParts
+        self.connectorTokens = connectorTokens
+        self.complexityLevel = complexityLevel
+        self.gasLimit = gasLimit
+        self.gasPrice = gasPrice
+    }
     
     func parameters() -> [String: Any] {
         var params: [String: Any] = [

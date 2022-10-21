@@ -9,6 +9,11 @@ public struct ApproveTransactionParameters {
     public let tokenAddress: String
     public let amount: Amount
     
+    public init(tokenAddress: String, amount: Amount) {
+        self.tokenAddress = tokenAddress
+        self.amount = amount
+    }
+    
     func parameters() -> [String: Any] {
         var params: [String: Any] = [:]
         switch amount {
