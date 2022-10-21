@@ -30,4 +30,9 @@ public struct ApproveTransactionParameters {
 public struct ApproveAllowanceParameters {
     public let tokenAddress: String
     public let walletAddress: String
+    
+    public init(tokenAddress: String, walletAddress: String) {
+        self.tokenAddress = tokenAddress
+        self.walletAddress = walletAddress
+    }
 }
